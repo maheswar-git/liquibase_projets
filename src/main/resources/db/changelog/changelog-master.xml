@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+      http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.29.xsd">
+
+    <!-- Tag the initial state -->
+    <changeSet id="tag-initial" author="you">
+        <tagDatabase tag="v0"/>
+    </changeSet>
+
+    <!-- Example: include SQL-based changeset -->
+    <changeSet id="001-create-employee-table" author="you">
+        <!-- run SQL from resource file -->
+        <sqlFile path="db/changelog/deploy/001_create_employee.sql"
+                 relativeToChangelogFile="false"
+                 endDelimiter=";" />
+        <!-- We MUST define rollback for SQL-based changes -->
+        <rollback>
+            <sqlFile path="db/changelog/rollback/001-drop-employee-table.sql" />
+        </rollback>
+    </changeSet>
+
+    <!-- You can also tag the database as part of a changeset if desired -->
+    <changeSet id="tag-v1" author="you">
+        <tagDatabase tag="v1"/>
+    </changeSet>
+
+</databaseChangeLog>
